@@ -17,6 +17,11 @@ const Value = styled("h1")({
   margin: "8px 0",
 });
 
+const Select = styled("select")({
+  fontSize: "14px",
+  border: "none",
+});
+
 const App: React.FC = () => {
   const [value, setValue] = useState<number | undefined>(undefined);
 
@@ -41,6 +46,13 @@ const App: React.FC = () => {
   return (
     <Wrap>
       <Value>{value}</Value>
+      <Select name="currency-pair" id="currency-pair">
+        <option value="ETHUSD">ETHUSD</option>
+        <option value="ETHEUR">ETHEUR</option>
+        <option value="ETHXBT">ETHBTC</option>
+        <option value="XBTUSD">BTCUSD</option>
+        <option value="XBTEUR">BTCEUR</option>
+      </Select>
     </Wrap>
   );
 };
