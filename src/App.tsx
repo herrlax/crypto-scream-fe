@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { getPrice } from "./httpClient";
+import { getValue } from "./httpClient";
 
 const App: React.FC = () => {
-  const [price, setPrice] = useState<number | undefined>(undefined);
+  const [value, setValue] = useState<number | undefined>(undefined);
+
+  const updateValue = async () => {
+    try {
+      const value = await getValue();
+      setValue(value);
+      console.log("ETHUSD", value);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
-    const update = async () => {
-      try {
-        const price = await getPrice();
+    updateValue();
+    const interval = setInterval(updateValue, 90 * 1000); // poll every 90 seconds
 
-        setPrice(price);
-      } catch (e) {
-        console.error(e);
-      }
+    return () => {
+      clearInterval(interval);
     };
-
-    update();
   }, []);
 
-  return <div>ETH in USD: {price}</div>;
+  return <div>ETH in USD: {value}</div>;
 };
 
 export default App;

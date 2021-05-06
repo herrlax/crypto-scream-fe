@@ -1,10 +1,9 @@
 const PUBLIC_API = "";
 
-export const getPrice = async () => {
+export const getValue = async () => {
   const url = process.env.NODE_ENV
-    ? "http://localhost:9000/price/eth/usd"
+    ? "http://localhost:9000/value/eth/usd"
     : PUBLIC_API;
-  console.log("url", url);
 
   const res = await fetch(url, {
     mode: "cors",
