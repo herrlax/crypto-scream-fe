@@ -1,0 +1,22 @@
+[
+  { "value": "ETHUSD", "label": "ETHUSD" },
+  { "value": "ETHEUR", "label": "ETHEUR" },
+  { "value": "ETHGBP", "label": "ETHGBP" },
+  { "value": "ETHXBT", "label": "ETHBTC" },
+
+  { "value": "XBTUSD", "label": "BTCUSD" },
+  { "value": "XBTEUR", "label": "BTCEUR" },
+  { "value": "XBTGBP", "label": "BTCGBP" },
+
+  { "value": "DOTUSD", "label": "DOTUSD" },
+  { "value": "DOTEUR", "label": "DOTEUR" },
+  { "value": "DOTGBP", "label": "DOTGBP" },
+  { "value": "DOTETH", "label": "DOTETH" },
+  { "value": "DOTXBT", "label": "DOTBTC" },
+
+  { "value": "LTCUSD", "label": "LTCUSD" },
+  { "value": "LTCEUR", "label": "LTCEUR" },
+  { "value": "LTCGBP", "label": "LTCGBP" },
+  { "value": "LTCETH", "label": "LTCETH" },
+  { "value": "LTCXBT", "label": "LTCBTC" }
+]
