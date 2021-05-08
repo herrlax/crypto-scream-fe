@@ -1,9 +1,9 @@
 const PUBLIC_API = "";
 
-export const getValue = async () => {
+export const getValue = async (coin1: string, coin2: string) => {
   const url = process.env.NODE_ENV
-    ? "http://localhost:9000/value/eth/usd"
-    : PUBLIC_API;
+    ? `http://localhost:9000/value/${coin1}/${coin2}`
+    : `${PUBLIC_API}/value/${coin1}/${coin2}`;
 
   const res = await fetch(url, {
     mode: "cors",

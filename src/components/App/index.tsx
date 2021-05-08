@@ -1,5 +1,5 @@
 import { styled } from "goober";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getValue } from "../../httpClient";
 import Select from "../Select";
 import coinPairs from "./coinPairs.json";
@@ -24,14 +24,14 @@ const App: React.FC = () => {
   const [value, setValue] = useState<number | undefined>(undefined);
   const interval = useRef<NodeJS.Timeout | undefined>(undefined);
 
-  const updateValue = async () => {
+  const updateValue = useCallback(async () => {
     try {
-      const value = await getValue();
+      const value = await getValue(coinPair[0], coinPair[1]);
       setValue(value);
     } catch (e) {
       console.error(e);
     }
-  };
+  }, [coinPair]);
 
   useEffect(() => {
     if (interval.current) {
@@ -47,7 +47,7 @@ const App: React.FC = () => {
         clearInterval(interval.current);
       }
     };
-  }, [coinPair]);
+  }, [coinPair, updateValue]);
 
   const handleCoinPairChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const coin1 = e.target.value.slice(0, 3);
@@ -58,7 +58,7 @@ const App: React.FC = () => {
 
   return (
     <Wrap>
-      <Value>{value}</Value>
+      {value && <Value>{value}</Value>}
       <Select options={coinPairs} onChange={handleCoinPairChange} />
     </Wrap>
   );
