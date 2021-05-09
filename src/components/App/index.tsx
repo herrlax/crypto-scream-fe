@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getValue } from "../../httpClient";
 import Select from "../Select";
 import coinPairs from "./coinPairs.json";
+import Alarms from "../Alarms";
 
 const Wrap = styled("div")({
   display: "flex",
@@ -60,6 +61,7 @@ const App: React.FC = () => {
     <Wrap>
       {value && <Value>{value}</Value>}
       <Select options={coinPairs} onChange={handleCoinPairChange} />
+      <Alarms />
     </Wrap>
   );
 };
