@@ -57,7 +57,7 @@ const App: React.FC = () => {
       <Select
         current={{
           value: coinPair,
-          label: coinPair.replace("XBT", "BTC"),
+          label: coinPair.replace("XBT", "BTC"), // TODO do this replace somewhere else?
         }}
         options={coinPairs as SelectOption[]}
         onChange={setCoinPair}
