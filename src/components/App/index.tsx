@@ -1,9 +1,10 @@
 import { styled } from "goober";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getValue } from "../../httpClient";
-import Select from "../Select";
+import Select, { SelectOption } from "../Select";
 import coinPairs from "../../coinPairs.json";
 import Alarms from "../Alarms";
+import { CoinPair } from "../../utils";
 
 const Wrap = styled("div")({
   display: "flex",
@@ -21,13 +22,13 @@ const Value = styled("h1")({
 });
 
 const App: React.FC = () => {
-  const [coinPair, setCoinPair] = useState<[string, string]>(["ETH", "USD"]);
+  const [coinPair, setCoinPair] = useState<CoinPair>("ETHUSD");
   const [value, setValue] = useState<number | undefined>(undefined);
   const interval = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const updateValue = useCallback(async () => {
     try {
-      const value = await getValue(coinPair[0], coinPair[1]);
+      const value = await getValue(coinPair);
       setValue(value);
     } catch (e) {
       console.error(e);
@@ -50,17 +51,17 @@ const App: React.FC = () => {
     };
   }, [coinPair, updateValue]);
 
-  const handleCoinPairChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const coin1 = e.target.value.slice(0, 3);
-    const coin2 = e.target.value.slice(3, 6);
-
-    setCoinPair([coin1, coin2]);
-  };
-
   return (
     <Wrap>
       {value && <Value>{value}</Value>}
-      <Select options={coinPairs} onChange={handleCoinPairChange} />
+      <Select
+        current={{
+          value: coinPair,
+          label: coinPair.replace("XBT", "BTC"),
+        }}
+        options={coinPairs as SelectOption[]}
+        onChange={setCoinPair}
+      />
       <Alarms />
     </Wrap>
   );

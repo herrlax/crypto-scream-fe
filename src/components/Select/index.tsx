@@ -1,5 +1,6 @@
 import { styled } from "goober";
 import React from "react";
+import { CoinPair } from "../../utils";
 import { color } from "../colors";
 
 type SelectSize = "small" | "medium";
@@ -35,14 +36,14 @@ const StyledSelect = styled("select")([
 ]) as any;
 
 export type SelectOption = {
-  value: string;
+  value: CoinPair;
   label: string;
 };
 
 type Props = {
   options: SelectOption[];
   current?: SelectOption;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (pair: CoinPair) => void;
   size?: "medium" | "small";
 };
 
@@ -51,27 +52,31 @@ const Select: React.FC<Props> = ({
   current,
   onChange,
   size = "medium",
-}) => (
-  <StyledSelect
-    name="coin-pair-select"
-    id="coin-pair-select"
-    onChange={onChange}
-    size={size}
-  >
-    {current && (
-      <option key={current.value} value={current.value}>
-        {current.label}
-      </option>
-    )}
-    {options
-      .filter((o) => o.value !== current?.value)
-      .map((o) => (
-        <option key={o.value} value={o.value}>
-          {o.label}
+}) => {
+  return (
+    <StyledSelect
+      name="coin-pair-select"
+      id="coin-pair-select"
+      onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+        onChange(e.target.value as CoinPair);
+      }}
+      size={size}
+    >
+      {current && (
+        <option key={current.value} value={current.value}>
+          {current.label}
         </option>
-      ))}
-    ;
-  </StyledSelect>
-);
+      )}
+      {options
+        .filter((o) => o.value !== current?.value)
+        .map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      ;
+    </StyledSelect>
+  );
+};
 
 export default Select;

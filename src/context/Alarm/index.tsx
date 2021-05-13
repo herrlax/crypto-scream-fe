@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from "react";
+import { CoinPair } from "../../utils";
 
 export type Alarm = {
   id: string;
-  coinPair: string;
+  coinPair: CoinPair;
   value: number;
 };
 
