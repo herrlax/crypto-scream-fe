@@ -2,7 +2,7 @@ import { styled } from "goober";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getValue } from "../../httpClient";
 import Select from "../Select";
-import coinPairs from "./coinPairs.json";
+import coinPairs from "../../coinPairs.json";
 import Alarms from "../Alarms";
 
 const Wrap = styled("div")({
