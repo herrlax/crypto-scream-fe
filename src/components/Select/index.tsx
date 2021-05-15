@@ -20,7 +20,7 @@ const StyledSelect = styled("select")([
     backgroundImage: Arrrow(color.OFF_WHITE),
     backgroundRepeat: "no-repeat",
     "&:focus": {
-      outline: `2px solid ${color.WHITE}`,
+      outline: `1px solid ${color.WHITE}`,
       backgroundImage: Arrrow(color.WHITE),
     },
   },
