@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import Select, { SelectOption } from "../../../Select";
 import coinPairs from "../../../../coinPairs.json";
 import { CoinPair } from "../../../../utils";
+import Field from "../../../CoinValueField";
 
 type Props = {
   coinPair: CoinPair;
@@ -30,11 +31,9 @@ const Alarm: React.FC<Props> = ({
 
   return (
     <>
-      <input
-        type="number"
+      <Field
         value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          const val = parseFloat(e.target.value);
+        onChange={(val: number) => {
           setValue(val);
           callOnChange(pair, val);
         }}
